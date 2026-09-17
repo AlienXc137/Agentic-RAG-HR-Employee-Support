@@ -81,7 +81,7 @@ Private HR KB    Tavily Web Search
 Pinecone         (fallback only)
  └───────┬───────┘
          ↓
-OpenAI LLM
+Groq LLM
 Grounded Answer
 ```
 
@@ -125,8 +125,8 @@ Generate from KB   [4] Tavily Web Search
 | Layer | Technology | Purpose |
 |---|---|---|
 | Agent workflow | LangGraph | Stateful routing and conditional decisions |
-| LLM | OpenAI | Routing, grading, rewriting, answer generation |
-| Embeddings | OpenAI `text-embedding-3-small` | Vector embeddings |
+| LLM | Groq | Routing, grading, rewriting, answer generation |
+| Embeddings | Huggingface `all-MiniLM-L6-v2` | Vector embeddings |
 | Vector DB | Pinecone | Private enterprise HR knowledge base |
 | External search | Tavily | Fallback when company HR KB is insufficient |
 | API | FastAPI | Backend and REST endpoints |
@@ -194,13 +194,14 @@ pip install -r requirements.txt
 Copy `.env.example` to `.env` and add your keys.
 
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
+HUGGINGFACEHUB_API_TOKEN=your_huggingface_api_token_here
 TAVILY_API_KEY=your_tavily_api_key_here
 PINECONE_API_KEY=your_pinecone_api_key_here
 PINECONE_INDEX_NAME=fde-hr-policy-rag
 PINECONE_NAMESPACE=company-hr-kb
-OPENAI_MODEL=gpt-4o-mini
-EMBEDDING_MODEL=text-embedding-3-small
+GROQ_MODEL=openai/gpt-oss-20b
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 ADMIN_API_KEY=change-me-in-production
 APP_ENV=development
 ```
